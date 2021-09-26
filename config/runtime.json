@@ -1,0 +1,9 @@
+{
+    "name": "Smart Light Controller",
+    "port": 8000,
+    "db": {
+        "user": "backendDev",
+        "password": "bB5rothMGVdP1bcd"
+    },
+    "API_Address": "http://localhost:8000"
+}

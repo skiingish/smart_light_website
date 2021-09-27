@@ -19,19 +19,21 @@ const RoomSelector = () => {
     const [lights, setLights] = useState(null);
     const [apartment_id, updateApartmentID] = useState('');
     const [room_id, updateRoomID] = useState('');
+    const [showroomsSelector, updateRoomSelector] = useState(false);
+    const [showDeviceSelector, updateDeviceSelector] = useState(false);
 
     const getapartmentURL = `http://localhost:8000/list/apartments/`;
     const getroomsURL = "http://localhost:8000/list/rooms/apartment/testapartment/";
     const getdeviceListUrl = "http://localhost:8000//list/devices/room/:id/";
 
     // Upon choosing an apartment set the choosen apartment ID and pull the rooms data. 
-    const setApartmentIDGetRoomsData = (e) => {
+    const setApartmentIDGetRoomsData = async (e) => {
         //apartmentID = e.target.value;
         updateApartmentID(e.target.value);
-        axios.get(`http://localhost:8000/list/rooms/apartment/${e.target.value}/`)
+        await axios.get(`http://localhost:8000/list/rooms/apartment/${e.target.value}/`)
             .then((response) => {
                 setRooms(response.data);
-                showroomsSelector = true;
+                updateRoomSelector(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -45,7 +47,7 @@ const RoomSelector = () => {
         axios.get(`http://localhost:8000/list/lights/room/${e.target.value}/`)
             .then((response) => {
                 setLights(response.data);
-                showDeviceSelector = true;
+                updateDeviceSelector(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -96,6 +98,7 @@ const RoomSelector = () => {
             <div>
                 <label>Choose an apartment:</label>
                 <select id="apartments" name="apartments" onChange={setApartmentIDGetRoomsData} value={apartment_id}>
+                    <option></option>
                     {apartments.map(apartment => <option>{apartment}</option>)}
                 </select>
                 {showroomsSelector ? <button onClick={toogleApartment}>Toggle Selected Apartment</button> : <></>}
@@ -104,6 +107,7 @@ const RoomSelector = () => {
                 ? <div>
                     <label>Choose a room:</label>
                     <select id="rooms" name="rooms" onChange={setRoomsIDGetLightData} value={room_id}>
+                        <option></option>
                         {rooms.map(room => <option>{room}</option>)}
                     </select>
                     {showDeviceSelector ? <button onClick={toogleRoom}>Toggle Selected Room</button> : <></>}
@@ -114,6 +118,7 @@ const RoomSelector = () => {
                 ? <div>
                     <label>Choose a light:</label>
                     <select id="lights" name="lights" >
+                        <option></option>
                         {lights.map(light => <option>{light}</option>)}
                     </select>
                 </div> 

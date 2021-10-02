@@ -32,6 +32,7 @@ const RoomSelector = () => {
             .then((response) => {
                 setRooms(response.data);
                 updateRoomSelector(true);
+                refreshDeviceList();
             })
             .catch((err) => {
                 console.log(err);
@@ -46,6 +47,7 @@ const RoomSelector = () => {
             .then((response) => {
                 setLights(response.data);
                 updateDeviceSelector(true);
+                refreshDeviceList();
             })
             .catch((err) => {
                 console.log(err);
@@ -64,6 +66,7 @@ const RoomSelector = () => {
         .then(res => {
             console.log(res);
             alert(`Toggled Lights In ${apartment_id}`);
+            refreshDeviceList();
         })
         .catch(err => {
             console.log(err);
@@ -78,6 +81,7 @@ const RoomSelector = () => {
         .then(res => {
             console.log(res);
             alert(`Toggled Lights In ${room_id}`);
+            refreshDeviceList();
         })
         .catch(err => {
             console.log(err);
@@ -90,10 +94,17 @@ const RoomSelector = () => {
         .then(res => {
             console.log(res);
             alert(`Toggled Lights In ${device_id}`);
+            refreshDeviceList();
         })
         .catch(err => {
             console.log(err);
         })
+    }
+    
+    const refreshDeviceList = () => {
+        axios.get(lightLookupURL).then((response) => {
+            setDevices(response.data);
+        });
     } 
 
     // Call the starting device lists. 
@@ -154,8 +165,10 @@ const RoomSelector = () => {
             }
             <br></br>
             <br></br>
-            <h3>All Devices</h3>
-            {devices.map(device => <p>Device ID: {device.device_id}, Current State: {device.current_state}</p>)}
+            <div className='Device List'>
+                <h3>All Devices</h3>
+                {devices.map(device => <p>Device ID: {device.device_id}, Current State: {device.current_state}</p>)}
+            </div>
         </div>
     </div>)
 }

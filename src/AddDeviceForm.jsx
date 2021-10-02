@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Greeting from "./Greeting";
+import './css/AddDeviceForm.css';
 import axios from "axios";
 
 // The base API

@@ -2,3 +2,14 @@
   text-align: center;
 }
 
+.buttonContainer {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.toggle-page-button {
+  font-size: 1.5em;
+}

@@ -4,17 +4,19 @@ import NavBar from './NavBar';
 import RoomSelector from "./RoomSelector";
 import AddDeviceForm from "./AddDeviceForm";
 
-
 function App() {
   const [showAddDevicePage, updateAddDevicePage] = useState(false);
+  const [toggleSwitchName, updateSwitchName] = useState('Add Device')
 
   const toggleAddDevicePage = () => {
     if (showAddDevicePage) {
       updateAddDevicePage(false);
+      updateSwitchName('Add Device');
       
     }
     else {
       updateAddDevicePage(true);
+      updateSwitchName('Toggle Lights');
     }
   }
 
@@ -22,7 +24,9 @@ function App() {
     <div>
       <NavBar />
       <br></br>
-      <button onClick={toggleAddDevicePage}>Toggle</button>
+      <div className='buttonContainer'>
+        <button className='toggle-page-button' onClick={toggleAddDevicePage}>{toggleSwitchName}</button>
+      </div>
       <br></br>
       <br></br>
       {showAddDevicePage
@@ -32,18 +36,6 @@ function App() {
         : <RoomSelector />
       }
     </div>
-    // <div className="App">
-    // {
-    //   !showAddDevicePage ?
-    //   <Greeting
-    //   text = "Good Morning"
-    //   />
-
-    //   :
-    //   <Login />
-    // }
-    // <Login />
-    // </div>
   );
 }
 

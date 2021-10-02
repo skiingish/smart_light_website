@@ -11,7 +11,9 @@ const RoomSelector = () => {
     // The starting states. 
     const [apartments, setApartments] = useState(null);
     const [rooms, setRooms] = useState(null);
+    const [devices, setDevices] = useState(null);
     const [lights, setLights] = useState(null);
+    const [lightLookupURL, changeURL] = useState(`${baseAPIurl}/list/lights/`) 
     const [apartment_id, updateApartmentID] = useState('');
     const [room_id, updateRoomID] = useState('');
     const [device_id, updateDeviceID] = useState('');
@@ -106,10 +108,17 @@ const RoomSelector = () => {
           setRooms(response.data);
         });
       }, []);
+
+      React.useEffect(() => {
+        axios.get(lightLookupURL).then((response) => {
+          setDevices(response.data);
+        });
+      }, []);
     
     // Set as null at first, in the event of no data and page loads before call finishes. 
     if (!apartments) return null;
     if (!rooms) return null;
+    if (!devices) return null;
 
     return (<div>
         <div className="room-selector">
@@ -130,7 +139,7 @@ const RoomSelector = () => {
                     </select>
                     {showDeviceSelector ? <button className='light-toggle-button' onClick={toggleRoom}>Toggle Selected Room</button> : <></>}
                 </div> 
-                : <h1>Please Select A Apartment</h1>
+                : <h1></h1>
             }
             {showDeviceSelector
                 ? <div>
@@ -141,8 +150,12 @@ const RoomSelector = () => {
                     </select>
                     {showDeviceSelector ? <button className='light-toggle-button' onClick={toggleDevice}>Toggle Selected Device</button> : <></>}
                 </div> 
-                : <h1>Please Select A Room</h1>
+                : <h1></h1>
             }
+            <br></br>
+            <br></br>
+            <h3>All Devices</h3>
+            {devices.map(device => <p>Device ID: {device.device_id}, Current State: {device.current_state}</p>)}
         </div>
     </div>)
 }

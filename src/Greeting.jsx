@@ -2,7 +2,7 @@ import React from "react";
 
 const Greeting = (props) => {
     return( <div>
-        <h1>{props.text}</h1>
+        <h1> Add a device: {props.text}</h1>
     </div>)
 }
 

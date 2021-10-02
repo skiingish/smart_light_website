@@ -27,7 +27,6 @@ function App() {
       <br></br>
       {showAddDevicePage
         ? <div>
-          <h1>Add Device</h1>
           <AddDeviceForm />
         </div>
         : <RoomSelector />

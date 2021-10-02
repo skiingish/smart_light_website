@@ -1,0 +1,20 @@
+/* RoomSelector */
+
+.room-selector {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.selector {
+  text-align: center;
+  margin: 20px;
+  font-size: 1em;
+  padding: 5px;
+}
+
+.light-toggle-button {
+  padding: 10px;
+  font-size: 0.7em;
+}
